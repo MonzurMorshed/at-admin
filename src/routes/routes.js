@@ -9,11 +9,17 @@ import ViewProduct from '../components/admin/product/ViewProduct';
 import EditProduct from '../components/admin/product/EditProduct';
 import Order from '../components/admin/order/Order';
 import PosDashboard from '../components/admin/pos/PosDashboard';
+import Vendor from '../components/admin/vendor/Vendor';
+import ViewVendor from '../components/admin/vendor/ViewVendor';
+import EditVendor from '../components/admin/vendor/EditVendor';
 
 
 const routes = [
     { path: '/admin', exact: true, name: 'Admin' },
     { path: '/admin/dashboard', exact: true, name: 'Dashboard', component: Dashboard },
+    { path: '/admin/add-vendor', exact: true, name: 'vendor', component: Vendor },
+    { path: '/admin/view-vendor', exact: true, name: 'ViewVendor', component: ViewVendor },
+    { path: '/admin/edit-vendor/:id', exact: true, name: 'EditVendor', component: EditVendor },
     { path: '/admin/add-category', exact: true, name: 'Category', component: Category },
     { path: '/admin/view-category', exact: true, name: 'ViewCategory', component: ViewCategory },
     { path: '/admin/edit-category/:id', exact: true, name: 'EditCategory', component: EditCategory },

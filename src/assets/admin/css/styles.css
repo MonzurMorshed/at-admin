@@ -11364,6 +11364,7 @@ nav.sb-topnav.navbar.navbar-expand {
   font-weight: 600;
 }
 
-.dtable{
-  
+.rdt_TableHeader {
+  display: contents;
+  padding: 0px !important;
 }

@@ -11,7 +11,7 @@ const ViewCategory = () => {
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
 
-    const editEvent = () => {
+    const editEvent = (e) => {
         // e.persist();
         // setCategory({...categoryInput, [e.target.name]: e.target.value });
         alert('Edit');
@@ -26,76 +26,77 @@ const ViewCategory = () => {
     const dataArray = [
         {
             "id": 1,
-            "parent_id": 0,
-            "name": "Electronic-2",
-            "meta_key": null,
-            "meta_description": null,
-            "status": true,
+            "name":"Mafiz",
+            "mobile":"01923405632",
+            "phone":"01923405632",
+            "email":"mafiz@gmail.com",
+            "address":"Dhaka"
         },
         {
             "id": 2,
-            "parent_id": 0,
-            "name": "TV",
-            "meta_key": null,
-            "meta_description": null,
-            "status": true,
+            "name":"Morshed",
+            "mobile":"01923405632",
+            "phone":"01923405632",
+            "email":"morshed@gmail.com",
+            "address":"Cumilla"
         },
         {
             "id": 3,
-            "parent_id": 0,
-            "name": "TV",
-            "meta_key": null,
-            "meta_description": null,
-            "status": true,
-        },
-        {
-            "id": 4,
-            "parent_id": 0,
-            "name": "TV",
-            "meta_key": 'tv',
-            "meta_description": null,
-            "status": true,
+            "name":"Juel",
+            "mobile":"01923405632",
+            "phone":"01923405632",
+            "email":"juel@gmail.com",
+            "address":"Rajshahi"
         }
     ];
     
     const columns = [
-        {
-            name: 'Parent',
-            selector: row => row.parent_id,
-            sortable: true,
-            sortField: 'parent_id'
-        },
         {
             name: 'Name',
             selector: row => row.name,
             sortable: true,
             sortField: 'name'
         },
-        
         {
-            name: 'Meta Key',
-            selector: row => row.meta_key,
+            name: 'Mobile',
+            selector: row => row.mobile,
             sortable: true,
-            sortField: 'meta_key'
+            sortField: 'mobile'
         },
         {
-            name: 'Meta Description',
-            selector: row => row.meta_description,
+            name: 'Phone',
+            selector: row => row.phone,
             sortable: true,
-            sortField: 'meta_description'
+            sortField: 'phone'
         },
         {
-            name: 'Status',
-            selector: row => row.status,
+            name: 'Email',
+            selector: row => row.email,
             sortable: true,
-            sortField: 'status'
+            sortField: 'email'
+        },
+        {
+            name: 'Address',
+            selector: row => row.address,
+            sortable: true,
+            sortField: 'address'
         },
         {
             name: 'Actios',
             cell: (row) => 
                 <>
-                    <button id={row.ID} className="btn btn-success mr-2" onClick={editEvent}><FaEdit/></button>,
-                    <button id={row.ID} className="btn btn-danger" onClick={deleteEvent}><FaTrashAlt/></button>,
+                    <button 
+                        id={row.id} 
+                        className="btn btn-success mr-2" 
+                        onClick={(e) => editEvent(row.id)}>
+                        <FaEdit/>
+                    </button>
+                    <button 
+                        id={row.id} 
+                        className="btn btn-danger" 
+                        onClick={deleteEvent}>
+                        <FaTrashAlt/>
+                    </button>
                 </>
         }
     ];
@@ -126,7 +127,7 @@ const ViewCategory = () => {
             <div className='row mx-5'>
                 <div className='col-md-12 col-lg-12 col-sm-12 px-2 py-2'>
                     <div className="card p-2 text-center">
-                        <h4 className='card-title pt-2'>Category List</h4>
+                        <h4 className='card-title pt-2'>Vendor List</h4>
                         {/* <img Name="card-img-top" src="img_avatar1.png" alt="Card image" style={{width:100+'%'}}/> */}
                         <div className="card-body">
                             <div className='col-md-12'>
