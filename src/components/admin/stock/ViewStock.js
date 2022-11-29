@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import DataTable from 'react-data-table-component';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
   
-const ViewCategory = () => {
+const ViewStock = () => {
 
     const [pending, setPending] = useState(true);
     const [rows, setRows] = useState([]);
@@ -163,4 +163,4 @@ const ViewCategory = () => {
     );
 };
   
-export default ViewCategory;
+export default ViewStock;

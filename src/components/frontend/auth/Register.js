@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../../assets/admin/assets/images/front/amharctech-logo.png';
 import GoogleIcon  from '../../../assets/admin/assets/images/social_icon/google.png';
 import MicrosoftIcon  from '../../../assets/admin/assets/images/social_icon/microsoft.png';
@@ -37,9 +36,7 @@ function Register() {
 
         axios.post('http://192.168.88.107:3001/api/admin/register', data).then(res => {
                 res = res.data.resp;
-                console.log(res.statusCode);
-                console.log(res);
-                if(res.statusCode == 200){
+                if(res.statusCode === 200){
                     swal("Success",'Signup success. Please signin.',"success");
                     history.push('/');
                 }else{
@@ -57,7 +54,7 @@ function Register() {
                         <div className="row justify-content-center">
                             <div className="col-md-8">
                                 <div className="card registerCard">
-                                    <div className='logoStyle'><img alt="AT AhmarcTech" src={logo} className="py-3"/></div>
+                                    <div className='logoStyle'><img alt="logo" src={logo} className="py-3"/></div>
                                     <div className="card-body">
                                         <form onSubmit={registerSubmit}>
                                             <p className='text-bold'>Sign up for your account</p>
@@ -84,7 +81,7 @@ function Register() {
 
                                                 <div class="col-md-6 d-flex justify-content-center">
 
-                                                <a href="#!">Forgot password?</a>
+                                                <Link to="#!">Forgot password?</Link>
                                                 </div>
                                             </div>
 
@@ -113,7 +110,7 @@ function Register() {
                                                 </button>
                                             </div>
                                             <div class="text-center">
-                                                <p>Already have account ? <a href="/home">Sigin up to your account</a></p>
+                                                <p>Already have account ? <Link to="/home">Sigin up to your account</Link></p>
                                             </div>
                                         </form>
                                         
@@ -125,7 +122,7 @@ function Register() {
                 </div>
                 <div className='col-md-7 col-lg-7 col-sm-12 col-xs-12 rightSection'>
                     <div className="m-0 m-auto mt-2">
-                        <img alt="AT AhmarcTech" src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
+                        <img alt=" " src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
                         <div className="m-0 m-auto w-4/6 pt-3">
                             <p className="text-center text-bold text-white text-2xl"><strong>Turn your ideas to reality</strong></p>
                             <p className="text-center text-white text-sm pb-1">

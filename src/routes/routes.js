@@ -8,7 +8,6 @@ import AddProduct from '../components/admin/product/AddProduct';
 import ViewProduct from '../components/admin/product/ViewProduct';
 import EditProduct from '../components/admin/product/EditProduct';
 import Order from '../components/admin/order/Order';
-import PosDashboard from '../components/admin/pos/PosDashboard';
 import Vendor from '../components/admin/vendor/Vendor';
 import ViewVendor from '../components/admin/vendor/ViewVendor';
 import EditVendor from '../components/admin/vendor/EditVendor';

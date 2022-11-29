@@ -141,7 +141,7 @@ function Home() {
                 </div>
                 <div className='col-md-7 col-lg-7 col-sm-12 col-xs-12 rightSection'>
                     <div className="m-0 m-auto mt-2">
-                        <img alt="AT AhmarcTech" src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
+                        <img alt="AhmarcTech" src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
                         <div className="m-0 m-auto w-4/6 pt-3">
                             <p className="text-center text-bold text-white text-2xl"><strong>Turn your ideas to reality</strong></p>
                             <p className="text-center text-white text-sm pb-1">
