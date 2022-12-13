@@ -4,12 +4,17 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import DataTable from 'react-data-table-component';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+
+import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import SortIcon from "@mui/icons-material/ArrowDownward";
   
 const ViewCategory = () => {
 
     const [pending, setPending] = useState(true);
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
+    const [filterParent, setFilterParent] = useState('');
 
     const editEvent = () => {
         // e.persist();
@@ -111,13 +116,25 @@ const ViewCategory = () => {
 		item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
 	);
 
+    const filteredItemsByParent = dataArray.filter(
+		item => item.name && item.name.toLowerCase().includes(filterParent.toLowerCase()),
+	);
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             setRows(filteredItems);
             setPending(false);
         }, 2000);
         return () => clearTimeout(timeout);
-    }, [filterText]);    
+    }, [filterText]);
+    
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setRows(filteredItems);
+            setPending(false);
+        }, 2000);
+        return () => clearTimeout(timeout);
+    }, [filterParent]);
 
     return (
 
@@ -134,27 +151,47 @@ const ViewCategory = () => {
                                         columns={columns}
                                         data={filteredItems}
                                         pagination
+                                        selectableRowsComponent={Checkbox}
                                         // paginationResetDefaultPage={resetPaginationToggle} // optionally, a hook to reset pagination to page 1
                                         subHeader
                                         subHeaderComponent={
-                                            <input 
-                                                className='form-control w-25'
-                                                type="text"
-                                                placeholder='Search Here'
-                                                value={filterText}
-                                                onChange={(e) => setFilterText(e.target.value)}
-                                            />
+                                            <>
+                                                <input
+                                                    className='form-control w-25'
+                                                    type="text"
+                                                    placeholder='Search Here'
+                                                    value={filterText}
+                                                    onChange={(e) => setFilterText(e.target.value)} />
+                                                <input
+                                                    className='form-control w-25'
+                                                    type="text"
+                                                    placeholder='Search parent'
+                                                    value={filterText}
+                                                    onChange={(e) => setFilterText(e.target.value)} />
+                                            </>
                                         }
                                         subHeaderAlign="right"
                                         persistTableHead
                                         responsive
                                         paginationComponentOptions
                                         progressPending={pending}
-                                        highlightOnHover
                                         actions
                                     />
 
                             </div>
+
+                            <Paper>
+        <DataTable
+          title="Movies"
+          columns={columns}
+          data={filteredItems}
+          defaultSortField="name"
+          sortIcon={<SortIcon />}
+          pagination
+          selectableRows
+          selectableRowsComponent={Checkbox}
+        />
+      </Paper>
                         </div>
                     </div>
                 </div>
