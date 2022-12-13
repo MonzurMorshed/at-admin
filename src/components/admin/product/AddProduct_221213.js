@@ -7,42 +7,22 @@ function AddProduct()
 {
     const [categorylist, setCategorylist] = useState([]);
     const [productInput, setProduct] = useState({
-        // category_id: '',
-        // slug: '',
-        // name: '',
-        // description: '',
-
-        // meta_title: '',
-        // meta_keyword: '',
-        // meta_descrip: '',
-
-        // selling_price: '',
-        // original_price: '',
-        // qty: '',
-        // brand: '',
-        // featured: '',
-        // popular: '',
-        // status: '',
-
-        name: '',
+        category_id: '',
         slug: '',
+        name: '',
         description: '',
-        meta_tag: '',
-        meta_description: '',
-        meta_tag_keyword: '',
-        product_tag: '',
-        seo_url: '',
-        model: '',
-        sku: '',
-        image: '',
-        price: '',
-        max_quantiy: '',
-        min_quantiy: '',
-        quantity_nofification: '',
-        stock_status: '',
-        is_shipping: '',
+
+        meta_title: '',
+        meta_keyword: '',
+        meta_descrip: '',
+
+        selling_price: '',
+        original_price: '',
+        qty: '',
+        brand: '',
+        featured: '',
+        popular: '',
         status: '',
-        sort_order: '',
     });
     const [pricture, setPicture] = useState([]);
     const [errorlist, setError] = useState([]);
@@ -132,83 +112,13 @@ function AddProduct()
         <div className="container-fluid px-4">
             <div className="card mt-4">
                 <div className="card-header">
-                    <h4>Create a new product
-                        {/* <Link to="/admin/view-product" className="btn btn-primary btn-sm float-end">View Product</Link> */}
+                    <h4>Add Product
+                        <Link to="/admin/view-product" className="btn btn-primary btn-sm float-end">View Product</Link>
                     </h4>
-                    <ul>
-                        <li className="me-5 float-start">Dashboard</li>
-                        <li className="me-5 float-start">E-commerce</li>
-                        <li className="me-5 float-start">New product</li>
-                    </ul>
                 </div>
                 <div className="card-body">
                     <form onSubmit={submitProduct} encType="multipart/form-data">
-                        <div className='row'>
-                            <div className="col-8">
-                                <div className="tab-pane card-body border rounded" id="home">
-                                    <div className="form-group mb-3">
-                                        {/* <label>Slug</label> */}
-                                        <input type="text" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                        <small className="text-danger">{errorlist.slug}</small>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <textarea className="form-control" rows="7" placeholder="Write Something Awesome..."></textarea>
-                                        <small className="text-danger">{errorlist.slug}</small>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label>Images</label>
-                                        <input type="file" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                        <small className="text-danger">{errorlist.slug}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-4 border rounded">
-                                <div className="tab-pane card-body">
-                                    <div className="form-group mb-3">
-                                        <div className="form-check form-switch">
-                                            <input className="form-check-input" type="checkbox" role="switch" id="in_stock" />
-                                            <label className="form-check-label" for="in_stock">In Stock</label>
-                                        </div>
-                                        <small className="text-danger">{errorlist.meta_title}</small>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <input type="text" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                        <small className="text-danger">{errorlist.slug}</small>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <input type="text" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                        <small className="text-danger">{errorlist.slug}</small>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <label className="form-check-label">Gender</label>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <input type="radio" name="gender" onChange={handleInput} value={productInput.gender} placeholder="Product Code" className="form-check-input" />
-                                        <label className="form-check-label ms-1 me-4">Men</label>
-                                        <input type="radio" name="gender" onChange={handleInput} value={productInput.gender} placeholder="Product Code" className="form-check-input" />
-                                        <label className="form-check-label ms-1 me-4">Women</label>
-                                        <input type="radio" name="gender" onChange={handleInput} value={productInput.gender} placeholder="Product Code" className="form-check-input" />
-                                        <label className="form-check-label ms-1 me-4">Kids</label>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <fieldset className="border p-2">
-                                            <legend className="w-auto">Legend</legend>
-                                            <select name="category_id" onChange={handleInput} value={productInput.category_id} className="form-control">
-                                                <option>Select Category</option>
-                                                {
-                                                    categorylist.map( (item) => {
-                                                        return (
-                                                            <option value={item.id} key={item.id}>{item.name}</option>
-                                                        )
-                                                    })
-                                                }
-                                            </select>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+
                         <ul className="nav nav-tabs" id="myTab" role="tablist">
                             <li className="nav-item" role="presentation">
                                 <button className="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
@@ -222,16 +132,7 @@ function AddProduct()
                         </ul>
                         <div className="tab-content" id="myTabContent">
                             <div className="tab-pane card-body border fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div className="form-group mb-3">
-                                    {/* <label>Slug</label> */}
-                                    <input type="text" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                    <small className="text-danger">{errorlist.slug}</small>
-                                </div>
-                                <div className="form-group mb-3">
-                                    {/* <label>Slug</label> */}
-                                    <input type="text" name="slug" onChange={handleInput} value={productInput.slug} placeholder="Product Code" className="form-control" />
-                                    <small className="text-danger">{errorlist.slug}</small>
-                                </div>
+                                
                                 <div className="form-group mb-3">
                                     <label>Select Category</label>
                                     <select name="category_id" onChange={handleInput} value={productInput.category_id} className="form-control">
@@ -325,9 +226,8 @@ function AddProduct()
 
                             </div>
                         </div>
-
-
                         <button type="submit" className="btn btn-primary px-4 mt-2">Submit</button>
+
                     </form>
                 </div>
             </div>
