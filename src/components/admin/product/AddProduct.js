@@ -327,7 +327,7 @@ function AddProduct()
                         </div>
 
 
-                        <button type="submit" className="btn btn-primary px-4 mt-2">Submit</button>
+                        <button type="submit" className="btn btn-primary px-4 mt-2">Create Product</button>
                     </form>
                 </div>
             </div>
