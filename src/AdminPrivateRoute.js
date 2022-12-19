@@ -11,7 +11,7 @@ function AdminPrivateRoute({...rest}) {
     const [Authenticated, setAuthenticated] = useState(false);
     const [loading, setloading] = useState(true);
 
-    useEffect(() => {
+    /*useEffect(() => {
 
         let auth = JSON.parse(localStorage.getItem('auth'));
 
