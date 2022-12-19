@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
-import swal from 'sweetalert';
+// import axios from 'axios';
+// import swal from 'sweetalert';
 import { AiOutlineUser,AiOutlinePhone,AiOutlineMobile,AiOutlineMail,AiOutlineHome } from 'react-icons/ai';
 
 const iconstyle = {
@@ -37,13 +37,13 @@ function Vendor() {
     const submitVendor = (e) => {
         e.preventDefault();
 
-        const data = {
-            name:vendorInput.name,
-            mobile:vendorInput.mobile,
-            phone:vendorInput.phone,
-            email:vendorInput.email,
-            address:vendorInput.address
-        }
+        // const data = {
+        //     name:vendorInput.name,
+        //     mobile:vendorInput.mobile,
+        //     phone:vendorInput.phone,
+        //     email:vendorInput.email,
+        //     address:vendorInput.address
+        // }
 
         /*
         axios.post(`api/store-vendor`, data).then(res => {

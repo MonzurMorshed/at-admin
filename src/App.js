@@ -1,8 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import MasterLayout from './layouts/admin/MasterLayout';
+import Home from './components/frontend/Home';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import PublicRoute from './PublicRoute';
+import {Route} from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -17,18 +19,17 @@ function App() {
         <Router>
           <Switch>
 
-            <AdminPrivateRoute path="/admin" name="Admin" />
-
-            <PublicRoute path="/" name="Home" />
+            <AdminPrivateRoute path="/admin/dashboard" name="Dashboard" />
 
             {/* <Route path="/login">
               {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login />}
             </Route>
+
             <Route path="/register">
               {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
             </Route> */}
 
-            {/* <Route path="/admin" name="Admin" render={(props) => <MasterLayout {...props} />} /> */}
+            <Route path="/admin" name="Admin" render={(props) => <MasterLayout {...props} />} />
 
 
           </Switch>
