@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -19,11 +18,12 @@ import {
 } from "@material-ui/core";
 
 import StatusBullet from "../../StatusBullet";
+import Toolbar from '../Toolbar';
 
 const statusColors = {
   completed: "success",
-  processing: "info",
-  shipped: "danger",
+  approve: "info",
+  unapprove: "danger",
 };
 
 const useStyles = makeStyles(theme => ({
@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   
 export default function ViewVendor(props) {
 
-    const { sorting, setSorting, query, cubejsApi, ...rest } = props;
+    const { query, cubejsApi, ...rest } = props;
 
     const classes = useStyles();
   
@@ -77,11 +77,10 @@ export default function ViewVendor(props) {
       { text: "Phone", value: "dataArray.phone" },
       { text: "Email", value: "dataArray.email" },
       { text: "Address", value: "dataArray.address" },
+      { text: "Status", value: "dataArray.status" },
     ];
 
     const { resultSet, error, isLoading } = useState(false);
-
-    // const { dataArray,setDataArray } = useState([]);
 
     const dataArray = [
         {
@@ -90,7 +89,8 @@ export default function ViewVendor(props) {
             "mobile":"01923405632",
             "phone":"01923405632",
             "email":"mafiz@gmail.com",
-            "address":"Dhaka"
+            "address":"Dhaka",
+            "status": "Completed"
         },
         {
             "id": 2,
@@ -98,7 +98,8 @@ export default function ViewVendor(props) {
             "mobile":"01923405632",
             "phone":"01923405632",
             "email":"morshed@gmail.com",
-            "address":"Cumilla"
+            "address":"Cumilla",
+            "status": "Approved"
         },
         {
             "id": 3,
@@ -106,17 +107,44 @@ export default function ViewVendor(props) {
             "mobile":"01923405632",
             "phone":"01923405632",
             "email":"juel@gmail.com",
-            "address":"Rajshahi"
-        }
+            "address":"Rajshahi",
+            "status": "Unapprove"
+        },
+        {
+          "id": 4,
+          "name":"Mafiz",
+          "mobile":"01923405632",
+          "phone":"01923405632",
+          "email":"mafiz@gmail.com",
+          "address":"Dhaka",
+          "status": "Completed"
+      },
+      {
+          "id": 5,
+          "name":"Morshed",
+          "mobile":"01923405632",
+          "phone":"01923405632",
+          "email":"morshed@gmail.com",
+          "address":"Cumilla",
+          "status": "Approved"
+      },
+      {
+          "id": 6,
+          "name":"Juel",
+          "mobile":"01923405632",
+          "phone":"01923405632",
+          "email":"juel@gmail.com",
+          "address":"Rajshahi",
+          "status": "Unapprove"
+      }
     ];
 
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         setDataArray(data);
-    //     }, 2000);
-    //     return () => clearTimeout(timeout);
-    // }, [dataArray]);  
-
+    const [sorting, setSorting] = useState([]);
+    useEffect(() => {
+      const sortedData = dataArray.map((item) => item);
+      setSorting(sortedData);
+    }, []);
+      
     if (isLoading) {
       return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CircularProgress
         color="secondary" /></div>;
@@ -136,71 +164,79 @@ export default function ViewVendor(props) {
       const handleSetSorting = str => {
         setSorting([str, sorting[1] === "desc" ? "asc" : "desc"]);
       };
-    // }  
+    // } 
 
     return (
 
-        <div className='container my-5'>
-            
-            <div className='row mx-5'>
-                <div className='col-md-12 col-lg-12 col-sm-12 px-2 py-2'>
-                    <div className="card p-2 text-center">
-                        <h4 className='card-title pt-2'>Vendor List</h4>
-                        {/* <img Name="card-img-top" src="img_avatar1.png" alt="Card image" style={{width:100+'%'}}/> */}
-                        <div className="card-body">
-                            <CardContent className={classes.content}>
-                            <PerfectScrollbar>
-                                <div className={classes.inner}>
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow>
-                                                {columns.map((item) => (
-                                                <TableCell key={item.value + Math.random()}
-                                                            className={classes.hoverable}
-                                                            onClick={() => {
-                                                            handleSetSorting(`${item.value}`);
-                                                            }}
-                                                >
-                                                    <span>{item.text}</span>
-                                                    <Typography className={classes.arrow}>
-                                                        {/* {(sorting[0] === item.value) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />) : null} */}
-                                                    </Typography>
+      <div className='container my-5'>
+          
+          <h4 className='card-title pt-2'>Vendor List</h4>
+          <div className='row mx-5'>
+              <div className='col-md-12 col-lg-12 col-sm-12 px-2 py-2'>
+                  <div className="card p-2 text-center">
+                      {/* <img Name="card-img-top" src="img_avatar1.png" alt="Card image" style={{width:100+'%'}}/> */}
+                      <div className="card-body">
+                          <CardContent className={classes.content}>
+                          <PerfectScrollbar>
+                              <div>
+                                  <Table>
+                                      <TableHead>
+                                          <Toolbar vendorData={dataArray}/>
+                                          <TableRow>
+                                              {columns.map((item) => (
+                                              <TableCell key={item.value + Math.random()}
+                                                          
+                                                          onClick={() => {
+                                                          handleSetSorting(`${item.value}`);
+                                                          }}
+                                              >
+                                                  <span>{item.text}</span>
+                                                  <Typography className={classes.arrow}>
+                                                      {(sorting[0] === item.value) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />) : <KeyboardArrowUpIcon />}
+                                                  </Typography>
+                                              </TableCell>
+                                              ))}
+                                          </TableRow>
+                                          </TableHead>
+                                          <TableBody>
+                                          {dataArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(obj => (
+                                              <TableRow
+                                              className={classes.tableRow}
+                                              hover
+                                              key={obj.id}
+                                              >
+                                                  <TableCell>
+                                                      {obj.name}
+                                                  </TableCell>
+                                                  <TableCell>
+                                                      {obj.mobile}
+                                                  </TableCell>
+                                                  <TableCell>
+                                                      {obj.phone}
+                                                  </TableCell>
+                                                  <TableCell>
+                                                      {obj.email}
+                                                  </TableCell>
+                                                  <TableCell>
+                                                      {obj.address}
+                                                  </TableCell>
+                                                  <TableCell>
+                                                    <StatusBullet
+                                                      className={classes.status}
+                                                      color={statusColors["obj.status"]}
+                                                      size="sm"
+                                                    />
+                                                    {obj.status}
                                                 </TableCell>
-                                                ))}
-                                            </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                            {dataArray?.slice(0)(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(obj => (
-                                                <TableRow
-                                                className={classes.tableRow}
-                                                hover
-                                                key={obj.id}
-                                                >
-                                                    <TableCell>
-                                                        {obj.name}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {obj.mobile}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {obj.phone}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {obj.email}
-                                                    </TableCell>
-                                                    <TableCell>
-                                                        {obj.address}
-                                                    </TableCell>
-                                                </TableRow>
-                                            ))}
-                                            </TableBody>
-                                        </Table>
-                                        </div>
-                                    </PerfectScrollbar>
-                                    </CardContent>
-                                    <CardActions className={classes.actions}>
+                                              </TableRow>
+                                          ))}
+                                          </TableBody>
+                                      </Table>
+                                      </div>
+                                  </PerfectScrollbar>
+                                  </CardContent>
+                                  <CardActions className={classes.actions}>
                                     <TablePagination
-                                        
                                         count={dataArray?.length}
                                         onChangePage={handlePageChange}
                                         onChangeRowsPerPage={handleRowsPerPageChange}
@@ -208,12 +244,12 @@ export default function ViewVendor(props) {
                                         rowsPerPage={rowsPerPage}
                                         rowsPerPageOptions={[5, 10, 25, 50, 100]}
                                     />
-                                    </CardActions>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                  </CardActions>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
     )
 }
   
