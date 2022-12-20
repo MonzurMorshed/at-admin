@@ -133,13 +133,10 @@ const Toolbar = props => {
   };
 
   return (
-    <div
-      {...rest}
-      className={className}
-    >
+    
       <div className="container-fluid">
         <div className="row">  
-            <div vendor lg={3} sm={6} xl={3} xs={12} m={2} >
+            <div vendor className="col-md-3" >
                 <div className={classes}>
                     <AntTabs value={tabValue} onChange={(e, value) => {
                     handleChangeTab(e, value)
@@ -149,9 +146,9 @@ const Toolbar = props => {
                     <Typography className={classes.padding} />
                 </div>
             </div>
-            <div className={classes.date} item lg={3} sm={6} xl={3} xs={12} m={2}>
+            <div className={'col-md-3 ' + classes.date} vendor>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <div container justify="space-around">
+                    <div justify="space-around">
                         <KeyboardDatePicker
                             id="date-picker-dialog"
                             label={<span style={{ opacity: 0.6 }}>Start Date</span>}
@@ -165,10 +162,10 @@ const Toolbar = props => {
                     </div>
                 </MuiPickersUtilsProvider>
             </div>
-            <div className={classes.date} item lg={3} sm={6} xl={3} xs={12} m={2}
+            <div className={'col-md-3 ' + classes.date} vendor
             >
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <div container justify="space-around">
+                <div justify="space-around">
                 <KeyboardDatePicker
                     id="date-picker-dialog-finish"
                     label={<span style={{ opacity: 0.6 }}>Finish Date</span>}
@@ -182,7 +179,7 @@ const Toolbar = props => {
                 </div>
             </MuiPickersUtilsProvider>
             </div>
-            <div className={classes.range} item lg={3} sm={6} xl={3} xs={12} m={2}
+            <div className={'col-md-3 ' + classes.range} vendor
             >
             <Typography id="range-slider">
                 Range
@@ -199,7 +196,7 @@ const Toolbar = props => {
             </div>
         </div>
       </div>
-    </div>
+  
   );
 };
 

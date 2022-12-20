@@ -72,6 +72,7 @@ export default function ViewVendor(props) {
     const [page, setPage] = useState(0);
   
     const columns = [
+      { text: "Sl", value: "dataArray.id"},
       { text: "Name", value: "dataArray.name" },
       { text: "Mobile", value: "dataArray.mobile" },
       { text: "Phone", value: "dataArray.phone" },
@@ -86,7 +87,7 @@ export default function ViewVendor(props) {
         {
             "id": 1,
             "name":"Mafiz",
-            "mobile":"01923405632",
+            "mobile":"0192340563",
             "phone":"01923405632",
             "email":"mafiz@gmail.com",
             "address":"Dhaka",
@@ -95,7 +96,7 @@ export default function ViewVendor(props) {
         {
             "id": 2,
             "name":"Morshed",
-            "mobile":"01923405632",
+            "mobile":"01923405634",
             "phone":"01923405632",
             "email":"morshed@gmail.com",
             "address":"Cumilla",
@@ -113,7 +114,7 @@ export default function ViewVendor(props) {
         {
           "id": 4,
           "name":"Mafiz",
-          "mobile":"01923405632",
+          "mobile":"01923405635",
           "phone":"01923405632",
           "email":"mafiz@gmail.com",
           "address":"Dhaka",
@@ -139,15 +140,21 @@ export default function ViewVendor(props) {
       }
     ];
 
+    
     const [sorting, setSorting] = useState([]);
+    const [result, setResult] = useState([]);
+
     useEffect(() => {
-      const sortedData = dataArray.map((item) => item);
-      setSorting(sortedData);
+      const timeout = setTimeout(() => {
+        setResult(dataArray);
+      }, 2000);
+      return () => clearTimeout(timeout);
     }, []);
       
     if (isLoading) {
-      return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CircularProgress
-        color="secondary" /></div>;
+      return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <CircularProgress color="secondary" />
+      </div>;
     }
     if (error) {
       return <pre>{error.toString()}</pre>;
@@ -162,7 +169,31 @@ export default function ViewVendor(props) {
         setRowsPerPage(event.target.value);
       };
       const handleSetSorting = str => {
+        console.log(str);
+        console.log(sorting[1]);
         setSorting([str, sorting[1] === "desc" ? "asc" : "desc"]);
+        if(str === 'dataArray.id') {
+          console.log(dataArray);
+          setResult(
+            dataArray.sort((a, b) =>
+              a.id > b.id ? -1 : b.id < a.id ? 1 : 0
+            )
+          );
+        }
+        if(str === 'dataArray.name') {
+          setResult(
+            dataArray.sort((a, b) =>
+              a.name.toLowerCase() > b.name.toLowerCase() ? -1 : b.name.toLowerCase() < a.name.toLowerCase() ? 1 : 0
+            )
+          );
+        }
+        if(str === 'dataArray.status') {
+          setResult(
+            dataArray.sort((a, b) =>
+              a.status.toLowerCase() < b.status.toLowerCase() ? -1 : 1
+            )
+          );
+        }
       };
     // } 
 
@@ -179,9 +210,9 @@ export default function ViewVendor(props) {
                           <CardContent className={classes.content}>
                           <PerfectScrollbar>
                               <div>
+                                  <Toolbar vendorData={dataArray}/>
                                   <Table>
                                       <TableHead>
-                                          <Toolbar vendorData={dataArray}/>
                                           <TableRow>
                                               {columns.map((item) => (
                                               <TableCell key={item.value + Math.random()}
@@ -190,21 +221,25 @@ export default function ViewVendor(props) {
                                                           handleSetSorting(`${item.value}`);
                                                           }}
                                               >
-                                                  <span>{item.text}</span>
+                                                  <span>{item.text}
                                                   <Typography className={classes.arrow}>
                                                       {(sorting[0] === item.value) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />) : <KeyboardArrowUpIcon />}
                                                   </Typography>
+                                                  </span>
                                               </TableCell>
                                               ))}
                                           </TableRow>
                                           </TableHead>
                                           <TableBody>
-                                          {dataArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(obj => (
+                                          {result.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(obj => (
                                               <TableRow
                                               className={classes.tableRow}
                                               hover
                                               key={obj.id}
                                               >
+                                                  <TableCell>
+                                                      {obj.id}
+                                                  </TableCell>
                                                   <TableCell>
                                                       {obj.name}
                                                   </TableCell>
