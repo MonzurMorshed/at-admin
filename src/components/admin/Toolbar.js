@@ -103,8 +103,8 @@ const Toolbar = props => {
     // setStatusFilter(value);
     let statusSearch = '';
     if(value == 0) { statusSearch = 'unapprove'; }
-    else if(value == 0) { statusSearch = 'approve'; }
-    else if(value == 0) { statusSearch = 'completed'; }
+    else if(value == 1) { statusSearch = 'approve'; }
+    else if(value == 2) { statusSearch = 'completed'; }
     vendor.filter(
         item => item.status && item.status.toLowerCase().includes(statusSearch.toLowerCase()),
     );
@@ -129,7 +129,9 @@ const Toolbar = props => {
     rangeSetValue(newValue);
   };
   const setRangeFilter = (event, newValue) => {
-    setPriceFilter(newValue);
+    vendor.filter(function(){
+      setPriceFilter(newValue);
+    });
   };
 
   return (
@@ -146,6 +148,7 @@ const Toolbar = props => {
                     <Typography className={classes.padding} />
                 </div>
             </div>
+            {/* Date & Renge search 
             <div className={'col-md-3 ' + classes.date} vendor>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <div justify="space-around">
@@ -194,6 +197,7 @@ const Toolbar = props => {
                 max={2000}
             />
             </div>
+            End  */}
         </div>
       </div>
   

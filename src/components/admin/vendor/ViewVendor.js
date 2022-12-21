@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { BiDotsVerticalRounded } from 'react-icons/bi';
 import {
   Card,
   CardActions,
@@ -17,8 +18,9 @@ import {
   TablePagination,
 } from "@material-ui/core";
 
-import StatusBullet from "../../StatusBullet";
+import StatusBullet from '../../components/StatusBullet';
 import Toolbar from '../Toolbar';
+import useCustomSort from '../../components/useCustomSort';
 
 const statusColors = {
   completed: "success",
@@ -72,13 +74,14 @@ export default function ViewVendor(props) {
     const [page, setPage] = useState(0);
   
     const columns = [
-      { text: "Sl", value: "dataArray.id"},
-      { text: "Name", value: "dataArray.name" },
-      { text: "Mobile", value: "dataArray.mobile" },
-      { text: "Phone", value: "dataArray.phone" },
-      { text: "Email", value: "dataArray.email" },
-      { text: "Address", value: "dataArray.address" },
-      { text: "Status", value: "dataArray.status" },
+      { text: "Sl", value: "dataArray.id", accessor:'id'},
+      { text: "Name", value: "dataArray.name", accessor:'name' },
+      { text: "Mobile", value: "dataArray.mobile", accessor:'mobile' },
+      { text: "Phone", value: "dataArray.phone", accessor:'phone' },
+      { text: "Email", value: "dataArray.email", accessor:'email' },
+      { text: "Address", value: "dataArray.address", accessor:'address' },
+      { text: "Status", value: "dataArray.status", accessor:'status' },
+      { text: "Action"}
     ];
 
     const { resultSet, error, isLoading } = useState(false);
@@ -92,6 +95,7 @@ export default function ViewVendor(props) {
             "email":"mafiz@gmail.com",
             "address":"Dhaka",
             "status": "Completed"
+            
         },
         {
             "id": 2,
@@ -139,18 +143,30 @@ export default function ViewVendor(props) {
           "status": "Unapprove"
       }
     ];
-
     
     const [sorting, setSorting] = useState([]);
     const [result, setResult] = useState([]);
 
+    const { items, requestSort, sortConfig } = useCustomSort(dataArray);
+    const getClassNamesFor = (name) => {
+      if (!sortConfig) {
+        return;
+      }
+      return sortConfig.key === name ? sortConfig.direction : undefined;
+    };
+
+    const actionMenu = () => {
+      return ;
+    }
+    
+
     useEffect(() => {
       const timeout = setTimeout(() => {
-        setResult(dataArray);
+        setResult(items);
       }, 2000);
       return () => clearTimeout(timeout);
-    }, []);
-      
+    }, [result]);
+
     if (isLoading) {
       return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <CircularProgress color="secondary" />
@@ -159,73 +175,43 @@ export default function ViewVendor(props) {
     if (error) {
       return <pre>{error.toString()}</pre>;
     }
-    // if (dataArray) {
-    //   dataArray = dataArray.tablePivot();
+    
   
-      const handlePageChange = (event, page) => {
-        setPage(page);
-      };
-      const handleRowsPerPageChange = event => {
-        setRowsPerPage(event.target.value);
-      };
-      const handleSetSorting = str => {
-        console.log(str);
-        console.log(sorting[1]);
-        setSorting([str, sorting[1] === "desc" ? "asc" : "desc"]);
-        if(str === 'dataArray.id') {
-          console.log(dataArray);
-          setResult(
-            dataArray.sort((a, b) =>
-              a.id > b.id ? -1 : b.id < a.id ? 1 : 0
-            )
-          );
-        }
-        if(str === 'dataArray.name') {
-          setResult(
-            dataArray.sort((a, b) =>
-              a.name.toLowerCase() > b.name.toLowerCase() ? -1 : b.name.toLowerCase() < a.name.toLowerCase() ? 1 : 0
-            )
-          );
-        }
-        if(str === 'dataArray.status') {
-          setResult(
-            dataArray.sort((a, b) =>
-              a.status.toLowerCase() < b.status.toLowerCase() ? -1 : 1
-            )
-          );
-        }
-      };
-    // } 
+    const handlePageChange = (event, page) => {
+      setPage(page);
+    };
+     
+    const handleRowsPerPageChange = event => {
+      setRowsPerPage(event.target.value);
+    };
 
     return (
+
 
       <div className='container my-5'>
           
           <h4 className='card-title pt-2'>Vendor List</h4>
-          <div className='row mx-5'>
+          <div className='row mx-3'>
               <div className='col-md-12 col-lg-12 col-sm-12 px-2 py-2'>
                   <div className="card p-2 text-center">
                       {/* <img Name="card-img-top" src="img_avatar1.png" alt="Card image" style={{width:100+'%'}}/> */}
                       <div className="card-body">
                           <CardContent className={classes.content}>
+                          {isLoading}
                           <PerfectScrollbar>
                               <div>
-                                  <Toolbar vendorData={dataArray}/>
+                                  <Toolbar vendorData={result}/>
                                   <Table>
                                       <TableHead>
                                           <TableRow>
-                                              {columns.map((item) => (
-                                              <TableCell key={item.value + Math.random()}
-                                                          
-                                                          onClick={() => {
-                                                          handleSetSorting(`${item.value}`);
-                                                          }}
-                                              >
-                                                  <span>{item.text}
+                                              {columns.map((item,idx) => (
+                                              <TableCell key={item.value } onClick={() => requestSort(`${item.accessor}`) }
+                                            className={getClassNamesFor(`${item.accessor}`)}
+                                              >  
                                                   <Typography className={classes.arrow}>
-                                                      {(sorting[0] === item.value) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />) : <KeyboardArrowUpIcon />}
-                                                  </Typography>
-                                                  </span>
+                                                  {item.text}
+                                                  {(item.key === 'Action') ? '' : (sorting[0] === item.key) ? (sorting[1] === "desc" ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />) : <KeyboardArrowUpIcon />}
+                                                  </Typography>  
                                               </TableCell>
                                               ))}
                                           </TableRow>
@@ -237,33 +223,24 @@ export default function ViewVendor(props) {
                                               hover
                                               key={obj.id}
                                               >
-                                                  <TableCell>
-                                                      {obj.id}
-                                                  </TableCell>
-                                                  <TableCell>
-                                                      {obj.name}
-                                                  </TableCell>
-                                                  <TableCell>
-                                                      {obj.mobile}
-                                                  </TableCell>
-                                                  <TableCell>
-                                                      {obj.phone}
-                                                  </TableCell>
-                                                  <TableCell>
-                                                      {obj.email}
-                                                  </TableCell>
-                                                  <TableCell>
-                                                      {obj.address}
-                                                  </TableCell>
+                                                  <TableCell>{obj.id}</TableCell>
+                                                  <TableCell>{obj.name}</TableCell>
+                                                  <TableCell>{obj.mobile}</TableCell>
+                                                  <TableCell>{obj.phone}</TableCell>
+                                                  <TableCell>{obj.email}</TableCell>
+                                                  <TableCell>{obj.address}</TableCell>
                                                   <TableCell>
                                                     <StatusBullet
                                                       className={classes.status}
-                                                      color={statusColors["obj.status"]}
+                                                      color={statusColors['${obj.status}']}
                                                       size="sm"
                                                     />
                                                     {obj.status}
-                                                </TableCell>
-                                              </TableRow>
+                                                  </TableCell>
+                                                  <TableCell>
+                                                    <span onClick={() => actionMenu(`${obj.id}`) }><BiDotsVerticalRounded/></span>
+                                                  </TableCell>
+                                                </TableRow>
                                           ))}
                                           </TableBody>
                                       </Table>
