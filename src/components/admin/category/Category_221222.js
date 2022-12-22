@@ -96,45 +96,36 @@ function Category() {
                             <div className='row'>
                                 <div className='col-md-6'>
                                     <div className="form-group mb-3">
-                                        <input type="text" name="title" placeholder="Enter Title" onChange={handleInput} value={categoryInput.name} className="form-control" />
+                                        <input type="text" name="name" placeholder="Enter name" onChange={handleInput} value={categoryInput.name} className="form-control" />
                                     </div>
                                     <div className="form-group mb-3">
-                                        <CKEditor
-                                            editor={ ClassicEditor }
-                                            data={description}
-                                            onChange={handleDescriptionEditorInput}
-                                        />
-                                    </div>
-
-                                    <div className="form-group mb-3">
-                                        <label>Images</label>
-                                        <input type="file" name="image" onChange={handleInput} value={categoryInput.image} placeholder="Image" className="form-control" />
-                                        {/* <small className="text-danger">{errorlist.image}</small> */}
+                                        <input type="text" name="slug" placeholder="Enter slug" onChange={handleInput} value={categoryInput.slug} className="form-control" />
+                                        <span>{categoryInput.error_list.slug}</span>
                                     </div>
                                     
                                     <div className="form-group mb-3">
-                                        <input type="number" name="price" placeholder="Enter Price" onChange={handleInput} value={categoryInput.price} className="form-control" />
+                                        <input type="text" name="meta_title" placeholder="Enter meta title" onChange={handleInput} value={categoryInput.meta_title} className="form-control" />
                                     </div>
-                                    {/* <div className="form-group mb-3">
+                                    <div className="form-group mb-3">
                                         <textarea type="text" name="meta_key" placeholder="Enter meta keyword" onChange={handleInput} value={categoryInput.meta_key} className="form-control"></textarea>
-                                    </div> */}
-                                    {/* <div className="form-group mb-3">
+                                    </div>
+                                    <div className="form-group mb-3">
                                         <textarea type="text" name="meta_description" placeholder="Enter meta description" onChange={handleInput} value={categoryInput.meta_description} className="form-control"></textarea>
-                                    </div> */}
-                                    {/* <div className="form-group mb-3">
+                                    </div>
+                                    <div className="form-group mb-3">
                                         <input type="checkbox" name="status" onChange={handleInput} value={categoryInput.status} /> Status 0=shown/1=hidden
-                                    </div> */}
+                                    </div>
                                 </div>
                                 <div className='col-md-6'>
-                                    {/* <div className="form-group mb-3">
+                                    <div className="form-group mb-3">
                                         <CKEditor
                                             editor={ ClassicEditor }
                                             data={description}
                                             onChange={handleDescriptionEditorInput}
                                         />
-                                    </div> */}
+                                    </div>
                                     <div className="form-group mb-3">
-                                        <button type="submit" className="btn btn-primary px-4 float-end">Create Category</button>
+                                        <button type="submit" className="btn btn-primary px-4 float-end">Submit</button>
                                     </div>
                                 </div>
                             </div>

@@ -122,7 +122,7 @@ function Vendor() {
                                     <div className='col-md-9' style={inputField}><textarea name="address" onChange={handleInput} value={vendorInput.address} className="form-control"></textarea></div>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary px-4 float-end">Submit</button>
+                            <button type="submit" className="btn btn-primary px-4 float-end">Create Vendor</button>
 
                         </div>
                     </form>
