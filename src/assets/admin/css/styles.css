@@ -11368,3 +11368,8 @@ nav.sb-topnav.navbar.navbar-expand {
   display: contents;
   padding: 0px !important;
 }
+li:nth-child(1) {
+  list-style-type: none; 
+}
+
+ul li{color:##3a4345a1;}
