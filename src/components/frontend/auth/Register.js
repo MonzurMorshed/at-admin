@@ -34,11 +34,11 @@ function Register() {
 
         console.log(data);
 
-        axios.post('http://192.168.88.107:3001/api/admin/register', data).then(res => {
+        axios.post('http://165.232.40.251/api/admin/register', data).then(res => {
                 res = res.data.resp;
                 if(res.statusCode === 200){
                     swal("Success",'Signup success. Please signin.',"success");
-                    history.push('/');
+                    history.push('/admin');
                 }else{
                     swal("Warning",res.message,"warning");
                     history.push('/signup');

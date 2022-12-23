@@ -28,7 +28,7 @@ function Login() {
 
         
 
-        axios.post('https://192.168.88.107:3001/api/admin/login', data).then(res => {
+        axios.post('http://165.232.40.251/api/admin/login', data).then(res => {
                 
                 res = JSON.stringify(res.data.resp);
                 localStorage.setItem('auth', res);
@@ -38,10 +38,10 @@ function Login() {
                 {
                     
                 
-                    //const cookies = new Cookies();
+                    // const cookies = new Cookies();
                     
                     //const token = auth.jwt;
-                    // console.log(token);
+                    console.log(auth);
                     swal("Success",'',"success");
                     // cookies.set('jwt', auth.jwt, { path: '/admin' });
                 

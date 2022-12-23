@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useHistory} from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import MasterLayout from './layouts/admin/MasterLayout';
 import Home from './components/frontend/Home';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import PublicRoute from './PublicRoute';
 import {Route} from 'react-router-dom';
+import Login from './components/frontend/auth/Login';
+import Register from './components/frontend/auth/Register';
+import { Redirect } from 'react-router';
 
 import axios from 'axios';
 
@@ -21,13 +24,13 @@ function App() {
 
             <AdminPrivateRoute path="/admin/dashboard" name="Dashboard" />
 
-            {/* <Route path="/login">
+            <Route path="/login">
               {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login />}
             </Route>
 
-            <Route path="/register">
+            <Route path="/">
               {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Register />}
-            </Route> */}
+            </Route>
 
             <Route path="/admin" name="Admin" render={(props) => <MasterLayout {...props} />} />
 
