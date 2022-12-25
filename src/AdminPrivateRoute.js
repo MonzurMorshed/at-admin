@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import {Route, useHistory} from 'react-router-dom';
+import {Route, useHistory, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import MasterLayout from './layouts/admin/MasterLayout';
 import FrontendLayout from './layouts/frontend/FrontendLayout';
@@ -14,7 +14,7 @@ function AdminPrivateRoute({...rest}) {
 
     useEffect(() => {
 
-        let auth = JSON.parse(localStorage.getItem('auth'));
+        /*let auth = JSON.parse(localStorage.getItem('auth'));
 
         if(auth.statusCode === 200)
         {
@@ -24,7 +24,7 @@ function AdminPrivateRoute({...rest}) {
 
         return () => {
             setAuthenticated(false);
-        };
+        };*/
     }, []);
 
     
