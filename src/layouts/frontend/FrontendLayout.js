@@ -7,6 +7,8 @@ import publicRoutesList from '../../routes/Publicroutelist';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 
+console.log(publicRoutesList);
+
 const FrontendLayout = () => {
 
     return (

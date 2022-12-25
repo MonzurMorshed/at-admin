@@ -1,8 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import {Route, useHistory} from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 import MasterLayout from './layouts/admin/MasterLayout';
-// import swal from 'sweetalert';
+import FrontendLayout from './layouts/frontend/FrontendLayout';
+import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
 
@@ -11,7 +12,7 @@ function AdminPrivateRoute({...rest}) {
     const [Authenticated, setAuthenticated] = useState(false);
     const [loading, setloading] = useState(true);
 
-    /*useEffect(() => {
+    useEffect(() => {
 
         let auth = JSON.parse(localStorage.getItem('auth'));
 
@@ -26,8 +27,8 @@ function AdminPrivateRoute({...rest}) {
         };
     }, []);
 
-    /*
-    axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
+    
+    /*axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
         if(err.response.status === 401)
         {
             swal("Unauthorized",err.response.data.message,"warning");
@@ -71,7 +72,7 @@ function AdminPrivateRoute({...rest}) {
 
         <Route {...rest}
             render={ ({props,location}) =>  
-                <MasterLayout {...props} />
+                <FrontendLayout {...props} />
             }
         />
 
