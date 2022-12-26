@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-
 import axios from 'axios';
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import logo from '../../assets/admin/assets/images/front/amharctech-logo.png';
 import GoogleIcon  from '../../assets/admin/assets/images/social_icon/google.png';
 import MicrosoftIcon  from '../../assets/admin/assets/images/social_icon/microsoft.png';
@@ -12,7 +11,7 @@ import Cookies from 'universal-cookie';
 
 function Home() {
 
-    const history = useHistory();
+    let history = useHistory();
     
     const [loginInput, setLogin] = useState({
         email: '',
@@ -35,7 +34,7 @@ function Home() {
             password: loginInput.password,
         }
 
-        axios.post('login', data).then(res => {
+        axios.post('http://165.232.40.251/api/admin/login', data).then(res => {
 
             res = JSON.stringify(res.data.resp);
             localStorage.setItem('auth', res);
@@ -44,7 +43,7 @@ function Home() {
                 
             if(auth.statusCode === 200)
             {
-                swal("Success",'',"success");
+                swal("Success",'Sign In to dashboard',"success");
                 // if(res.data.role === 'admin')
                 // {
                 //     history.push('http://192.168.88.107:3001/admin/dashboard');
@@ -53,7 +52,10 @@ function Home() {
                 // {
                 //     history.push('/admin');
                 // }
-                history.push('/admin');
+                alert('Going to dashboard');
+                history.push('/admin/dashboard');
+                return <Redirect to='/admin/dashboard' />
+                
             }
             // else if(res.data.status === 401)
             // {
@@ -93,14 +95,14 @@ function Home() {
                                             <div class="row mb-4">
                                                 <div class="col-md-6 d-flex justify-content-center">
                                                     <div class="form-check mb-3 mb-md-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                                                        <input class="form-check-input" type="checkbox" value="" id="loginCheck" defaultChecked />
                                                         <label class="form-check-label" for="loginCheck"> Remember me </label>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 d-flex justify-content-center">
 
-                                                <a href="#!">Forgot password?</a>
+                                                <Link to="#!">Forgot password?</Link>
                                                 </div>
                                             </div>
 
@@ -129,7 +131,7 @@ function Home() {
                                                 </button>
                                             </div>
                                             <div class="text-center">
-                                                <p>Not Account Yet ? <a href="#!">Create An Account</a></p>
+                                                <p>Not Account Yet ? <Link to="/register">Create An Account</Link></p>
                                             </div>
                                         </form>
                                         

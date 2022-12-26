@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.regFormFooterText{
+    font-size: 0.8em;
+    justify-content: space-between;
+    display: flex;
+}

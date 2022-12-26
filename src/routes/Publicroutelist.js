@@ -19,7 +19,7 @@ const publicRoutesList = [
     { path: '/403', exact: true, name: 'Page403', component: Page403 },
     { path: '/404', exact: true, name: 'Page404', component: Page404 },
     { path: '/login', exact: true, name: 'Login', component: Login },
-    { path: '/signup', exact: true, name: 'Register', component: Register },
+    { path: '/register', exact: true, name: 'Register', component: Register },
     { path: '/collections', exact: true, name: 'ViewCategory', component: ViewCategory },
     { path: '/collections/:slug', exact: true, name: 'ViewProduct', component: ViewProduct },
     { path: '/collections/:category/:product', exact: true, name: 'ProductDetail', component: ProductDetail },

@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 function Cart()
 {
 
-    const history = useHistory();
+    let history = useHistory();
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState([]);
     var totalCartPrice = 0;

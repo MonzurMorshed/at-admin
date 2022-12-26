@@ -7,24 +7,42 @@ import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
 
-    const history = useHistory();
+    let history = useHistory();
 
     const [Authenticated, setAuthenticated] = useState(false);
     const [loading, setloading] = useState(true);
 
-    useEffect(() => {
+    // console.log(localStorage.getItem('auth'));
 
-        /*let auth = JSON.parse(localStorage.getItem('auth'));
+    // let auth = JSON.parse(localStorage.getItem('auth'));
+    //     console.log(auth);
+    //     alert('check' + Authenticated);
+    //     console.log('Auth');
+    //     console.log(auth);
+
+    //     if(auth.statusCode === 200)
+    //     {
+    //         setAuthenticated(true);
+    //     }
+    //     // setloading(false);
+
+    //     return () => {
+    //         setAuthenticated(false);
+    //     };
+
+    useEffect(() => {
+        
+        let auth = JSON.parse(localStorage.getItem('auth'));
 
         if(auth.statusCode === 200)
         {
             setAuthenticated(true);
         }
-        // setloading(false);
+        setloading(false);
 
         return () => {
             setAuthenticated(false);
-        };*/
+        };
     }, []);
 
     
@@ -55,26 +73,26 @@ function AdminPrivateRoute({...rest}) {
     );
     */
 
-    // if(loading)
-    // {
-    //     return <h1>Loading...</h1>
-    // }
+    if(loading)
+    {
+        return <h1>Loading...</h1>
+    }
 
     return (
         
-        // <Route {...rest}
-        //     render={ ({props, location}) => 
-        //         Authenticated ?
-        //         ( <MasterLayout {...props} /> ) :
-        //         ( <Redirect to={{pathname: "/login", state: {from: location} }} /> ) 
-        //     }
-        // />
-
         <Route {...rest}
-            render={ ({props,location}) =>  
-                <FrontendLayout {...props} />
+            render={ ({props, location}) => 
+                Authenticated ?
+                ( <MasterLayout {...props} /> ) :
+                ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
             }
         />
+
+        // <Route {...rest}
+        //     render={ ({props,location}) =>  
+        //         <FrontendLayout {...props} />
+        //     }
+        // />
 
     );
 }

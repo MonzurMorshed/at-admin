@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 function Checkout()
 {
 
-    const history = useHistory();
+    let history = useHistory();
     if(!localStorage.getItem('auth_token')){
         history.push('/');
         swal("Warning","Login to goto Cart Page","error");

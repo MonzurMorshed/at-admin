@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function Navbar() {
 
-    const history = useHistory();
+    let history = useHistory();
     const logoutSubmit = (e) => {
         e.preventDefault();
         

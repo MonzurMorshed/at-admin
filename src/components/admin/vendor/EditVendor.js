@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 
 function EditCategory(props) 
 {
-    const history = useHistory();
+    let history = useHistory();
     const [loading, setLoading] = useState(true);
     const [categoryInput, setCategory] = useState([]);
     const [error, setError] = useState([]);

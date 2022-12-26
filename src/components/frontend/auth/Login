@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 function Login() {
 
-    const history = useHistory();
+    let history = useHistory();
     
     const [loginInput, setLogin] = useState({
         email: '',
@@ -26,9 +26,7 @@ function Login() {
             password: loginInput.password,
         }
 
-        
-
-        axios.post('https://192.168.88.107:3001/api/admin/login', data).then(res => {
+        axios.post('http://165.232.40.251/api/admin/login', data).then(res => {
                 
                 res = JSON.stringify(res.data.resp);
                 localStorage.setItem('auth', res);
@@ -36,8 +34,7 @@ function Login() {
                     
                 if(auth.statusCode === 200)
                 {
-                    
-                
+                            
                     //const cookies = new Cookies();
                     
                     //const token = auth.jwt;

@@ -14,7 +14,7 @@ function Profile() {
     //         const userdata = JSON.stringify(response.data.resp);
     //       })
     //       .catch(function (error) {
-    //         // navigate('/'); 
+    //         // history.push('/'); 
     //       });
     // }
 

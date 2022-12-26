@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 
 function EditProduct(props)
 {
-    const history = useHistory();
+    let history = useHistory();
 
     const [categorylist, setCategorylist] = useState([]);
     const [productInput, setProduct] = useState({

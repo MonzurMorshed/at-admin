@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const history = useHistory();
+    let history = useHistory();
 
     const logoutSubmit = (e) => {
         e.preventDefault();
@@ -18,10 +18,14 @@ const Navbar = () => {
                 "jwt": `${auth.jwt}`
             },
         }
+        
+        console.log(auth);
+        
         const data = '';
-        axios.post('logout',data, {
+        axios.post('http://165.232.40.251/api/admin/logout',data, {
             headers: headers,
         }).then(res =>{
+            console.log('success...');
                 // if(auth.statusCode === 200)
                 // {
                     
@@ -44,7 +48,7 @@ const Navbar = () => {
     return (
         <nav className="sb-topnav navbar navbar-expand">
             <Link className="navbar-brand ps-3" to="/admin">
-                <img alt="AhmarcTech" src={TitleImage} className="m-0 m-auto px-4 py-5" style={{width: 100 + '%'}} />
+                <img alt="Ahmarc Tech" src={TitleImage} className="m-0 m-auto px-4 py-5" style={{width: 100 + '%'}} />
             </Link>
 
             <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
@@ -83,7 +87,7 @@ const Navbar = () => {
                         <li><Link className="dropdown-item" to="/admin/user/user">Profile</Link></li>
                         <li><Link className="dropdown-item" to="/admin/user/user-edit">Settings</Link></li>
                         <li><hr className="dropdown-divider" /></li>
-                        <li><Link className="dropdown-item" onClick={logoutSubmit} >Logout</Link></li>
+                        <li><span className="dropdown-item" onClick={logoutSubmit} >Logout</span></li>
                     </ul>
                 </li>
             </ul>

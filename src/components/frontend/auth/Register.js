@@ -10,7 +10,7 @@ import LogoInImage from '../../../assets/admin/assets/images/front/illus-1.png';
 
 function Register() {
 
-    const history = useHistory();
+    let history = useHistory();
     const [registerInput, setRegister] = useState({
         email: '',
         password: '',
@@ -32,16 +32,14 @@ function Register() {
             password_confirm: registerInput.confirm_password,
         }
 
-        console.log(data);
-
-        axios.post('http://192.168.88.107:3001/api/admin/register', data).then(res => {
+        axios.post('http://165.232.40.251/api/admin/register', data).then(res => {
                 res = res.data.resp;
                 if(res.statusCode === 200){
                     swal("Success",'Signup success. Please signin.',"success");
-                    history.push('/');
+                    history.push('/admin');
                 }else{
                     swal("Warning",res.message,"warning");
-                    history.push('/signup');
+                    history.push('/register');
                 }
         });
     }
@@ -71,15 +69,15 @@ function Register() {
                                                 <span>{registerInput.error_list}</span>
                                             </div>
 
-                                            <div class="row mb-4">
-                                                <div class="col-md-6 d-flex justify-content-center">
-                                                    <div class="form-check mb-3 mb-md-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="registerCheck" checked />
-                                                        <label class="form-check-label" for="registerCheck"> Remember me </label>
+                                            <div className="row mb-4">
+                                                <div className="col-md-6 d-flex justify-content-center">
+                                                    <div className="form-check mb-3 mb-md-0">
+                                                        <input className="form-check-input" type="checkbox" value="" id="registerCheck" checked />
+                                                        <label className="form-check-label" for="registerCheck"> Remember me </label>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 d-flex justify-content-center">
+                                                <div className="col-md-6 d-flex justify-content-center">
 
                                                 <Link to="#!">Forgot password?</Link>
                                                 </div>
@@ -109,7 +107,7 @@ function Register() {
                                                     <img className="logoSocialIocn" src={AppleIcon}/>
                                                 </button>
                                             </div>
-                                            <div class="text-center">
+                                            <div className="text-center regFormFooterText">
                                                 <p>Already have account ? <Link to="/home">Sigin up to your account</Link></p>
                                             </div>
                                         </form>
@@ -122,7 +120,7 @@ function Register() {
                 </div>
                 <div className='col-md-7 col-lg-7 col-sm-12 col-xs-12 rightSection'>
                     <div className="m-0 m-auto mt-2">
-                        <img alt=" " src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
+                        <img alt="AT" src={LogoInImage} className="m-0 m-auto mt-5 px-4 py-2 d-table" />
                         <div className="m-0 m-auto w-4/6 pt-3">
                             <p className="text-center text-bold text-white text-2xl"><strong>Turn your ideas to reality</strong></p>
                             <p className="text-center text-white text-sm pb-1">
@@ -130,7 +128,7 @@ function Register() {
                                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
                             </p>
                         </div>
-                        <div className="px-2 py-4 m-0 m-auto ">
+                        <div>
                             <button type="button" className="socialBtn col-md-4 btn-sm btn btn-primary d-table m-0 m-auto justify-content-between">
                                 Learn How
                             </button>

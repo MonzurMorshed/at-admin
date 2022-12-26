@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 function ProductDetail(props)
 {
 
-    const history = useHistory();
+    let history = useHistory();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);

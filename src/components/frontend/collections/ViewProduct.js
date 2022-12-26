@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 function ViewProduct(props)
 {
-    const history = useHistory();
+    let history = useHistory();
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState([]);
     const [category, setCategory] = useState([]);
