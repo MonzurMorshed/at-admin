@@ -232,7 +232,7 @@ export default function ViewVendor(props) {
                                                   <TableCell>
                                                     <StatusBullet
                                                       className={classes.status}
-                                                      color={statusColors['${obj.status}']}
+                                                      color={statusColors["`${obj.status}`"]}
                                                       size="sm"
                                                     />
                                                     {obj.status}
