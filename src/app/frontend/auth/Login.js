@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { Link, useHistory, Redirect } from 'react-router-dom';
-import logo from '../../assets/admin/assets/images/front/amharctech-logo.png';
-import GoogleIcon  from '../../assets/admin/assets/images/social_icon/google.png';
-import MicrosoftIcon  from '../../assets/admin/assets/images/social_icon/microsoft.png';
-import AppleIcon  from '../../assets/admin/assets/images/social_icon/apple.png';
-import LogoInImage from '../../assets/admin/assets/images/front/illus-1.png';
+import logo from '../../../assets/admin/assets/images/front/amharctech-logo.png';
+import GoogleIcon  from '../../../assets/admin/assets/images/social_icon/google.png';
+import MicrosoftIcon  from '../../../assets/admin/assets/images/social_icon/microsoft.png';
+import AppleIcon  from '../../../assets/admin/assets/images/social_icon/apple.png';
+import LogoInImage from '../../../assets/admin/assets/images/front/illus-1.png';
 import Cookies from 'universal-cookie';
 
-function Home() {
+function Login() {
 
     let history = useHistory();
     
@@ -24,7 +24,7 @@ function Home() {
         setLogin({...loginInput, [e.target.name]: e.target.value });
     }
 
-    const cookies = new Cookies();
+    // const cookies = new Cookies();
 
     const loginSubmit = (e) => {
         e.preventDefault();
@@ -36,10 +36,13 @@ function Home() {
 
         axios.post('http://165.232.40.251/api/admin/login', data).then(res => {
 
+            
             res = JSON.stringify(res.data.resp);
             localStorage.setItem('auth', res);
             
             let auth = JSON.parse(localStorage.getItem('auth'));
+            const cookies = new Cookies();
+            cookies.set('jwt', auth.jwt, { path: '/' });
                 
             if(auth.statusCode === 200)
             {
@@ -52,7 +55,6 @@ function Home() {
                 // {
                 //     history.push('/admin');
                 // }
-                alert('Going to dashboard');
                 history.push('/admin/dashboard');
                 return <Redirect to='/admin/dashboard' />
                 
@@ -163,4 +165,4 @@ function Home() {
     )
 }
 
-export default Home;
+export default Login;

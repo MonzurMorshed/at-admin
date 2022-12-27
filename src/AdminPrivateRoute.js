@@ -1,8 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import {Route, useHistory, Redirect} from 'react-router-dom';
 import axios from 'axios';
-import MasterLayout from './layouts/admin/MasterLayout';
-import FrontendLayout from './layouts/frontend/FrontendLayout';
+import MasterLayout from './app/layouts/admin/MasterLayout';
+import FrontendLayout from './app/layouts/frontend/FrontendLayout';
 import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {

@@ -1,11 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, useHistory,Route} from 'react-router-dom';
-import MasterLayout from './layouts/admin/MasterLayout';
-import Home from './components/frontend/Home';
+// import MasterLayout from './layouts/admin/MasterLayout';
 import AdminPrivateRoute from './AdminPrivateRoute';
-import PublicRoute from './PublicRoute';
-import Login from './components/frontend/auth/Login';
-import Register from './components/frontend/auth/Register';
+import Login from './app/frontend/auth/Login';
+import Register from './app/frontend/auth/Register';
 
 import axios from 'axios';
 
@@ -24,14 +22,14 @@ function App() {
             <AdminPrivateRoute path="/admin/dashboard" name="Dashboard" />
 
             <Route exact path="/">
-              {localStorage.getItem('auth_token') ? history.push("/") : <Home />}
+              {localStorage.getItem('auth_token') ? history.push("/") : <Login />}
             </Route>
 
             <Route path="/register">
               {localStorage.getItem('auth_token') ? history.push("/") : <Register />}
             </Route>
 
-            {/* <Route path="/" render={() => <Home/>} />
+            {/* <Route path="/" render={() => < Login/>} />
 
             <Route path="/register" render={() => <Register/>} />
 

@@ -1,16 +1,17 @@
-import Dashboard from '../components/admin/Dashboard';
-import Profile from '../components/admin//profile/Profile';
-import UpdateProfile from '../components/admin/profile/UpdateProfile';
-import Category from '../components/admin/category/Category';
-import ViewCategory from '../components/admin/category/ViewCategory';
-import EditCategory from '../components/admin/category/EditCategory';
-import AddProduct from '../components/admin/product/AddProduct';
-import ViewProduct from '../components/admin/product/ViewProduct';
-import EditProduct from '../components/admin/product/EditProduct';
-import Order from '../components/admin/order/Order';
-import Vendor from '../components/admin/vendor/Vendor';
-import ViewVendor from '../components/admin/vendor/ViewVendor';
-import EditVendor from '../components/admin/vendor/EditVendor';
+import Dashboard from '../app/admin/Dashboard';
+import Profile from '../app/admin/profile/Profile';
+import UpdateProfile from '../app/admin/profile/UpdateProfile';
+import Category from '../app/admin/category/Category';
+import ViewCategory from '../app/admin/category/ViewCategory';
+import EditCategory from '../app/admin/category/EditCategory';
+import AddProduct from '../app/admin/product/AddProduct';
+import ViewProduct from '../app/admin/product/ViewProduct';
+import EditProduct from '../app/admin/product/EditProduct';
+import Order from '../app/admin/order/Order';
+import Vendor from '../app/admin/vendor/Vendor';
+import ViewVendor from '../app/admin/vendor/ViewVendor';
+import EditVendor from '../app/admin/vendor/EditVendor';
+import BusinessProfile from '../app/admin/businessprofile/vendor/BusinessProfile';
 
 
 const routes = [
@@ -27,6 +28,7 @@ const routes = [
     { path: '/admin/edit-product/:id', exact: true, name: 'EditProduct', component: EditProduct },
     { path: '/admin/profile', exact: true, name: 'Profile', component: Profile },
     { path: '/admin/update-profile', exact: true, name: 'UpdateProfile', component: UpdateProfile },
+    { path: '/admin/business-profile', exact: true, name: 'businessprofile', component: BusinessProfile },
     { path: '/admin/orders', exact: true, name: 'Order', component: Order },
 ];
 

@@ -1,47 +1,36 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import TitleImage from '../../assets/admin/assets/images/front/amharctech-logo.png';
+import TitleImage from '../../../assets/admin/assets/images/front/amharctech-logo.png';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+
+
 
 const Navbar = () => {
-
+    
+    
     let history = useHistory();
 
     const logoutSubmit = (e) => {
         e.preventDefault();
         let auth = JSON.parse(localStorage.getItem('auth'));
         const headers = {
-            'Content-Type': 'application/json',
-            "Cookie" : {
-                "jwt": `${auth.jwt}`
-            },
+            Authorization : `Bearer ${auth.jwt}`
         }
-        
-        console.log(auth);
         
         const data = '';
         axios.post('http://165.232.40.251/api/admin/logout',data, {
             headers: headers,
         }).then(res =>{
-            console.log('success...');
-                // if(auth.statusCode === 200)
-                // {
-                    
-                    // swal("Success",res.data.message,"success");
-                    swal("Success",'',"success");
-                    localStorage.removeItem('auth');
-                    // if(res.data.role === 'admin')
-                    // {
-                    //     history.push('http://192.168.88.107:3001/admin/dashboard');
-                    // }
-                    // else
-                    // {
-                    //     history.push('/admin');
-                    // }
-                    history.push('/home');
-                // }
+            if(auth.statusCode === 200){
+                const cookies = new Cookies();
+                cookies.remove('jwt','/');
+                swal("Success",'',"success");
+                localStorage.removeItem('auth');
+                history.push('/');
+            }
         });
     }
 
@@ -51,7 +40,7 @@ const Navbar = () => {
                 <img alt="Ahmarc Tech" src={TitleImage} className="m-0 m-auto px-4 py-5" style={{width: 100 + '%'}} />
             </Link>
 
-            <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
+            <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i className="fas fa-bars"></i></button>
 
             <Link className="nav-link" to="/admin/dashboard">My Apps</Link>
 
