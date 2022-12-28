@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://192.168.88.107:3001/api/admin/";
+axios.defaults.baseURL = "http://165.232.40.251/api/admin/";
 axios.defaults.withCredentials = true;
 
 ReactDOM.render(

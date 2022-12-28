@@ -1,33 +1,52 @@
 import React, {useState,useEffect} from 'react';
-import {Route, useHistory} from 'react-router-dom';
-// import axios from 'axios';
-import MasterLayout from './layouts/admin/MasterLayout';
-// import swal from 'sweetalert';
+import {Route, useHistory, Redirect} from 'react-router-dom';
+import axios from 'axios';
+import MasterLayout from './app/layouts/admin/MasterLayout';
+import FrontendLayout from './app/layouts/frontend/FrontendLayout';
+import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
 
-    const history = useHistory();
+    let history = useHistory();
 
     const [Authenticated, setAuthenticated] = useState(false);
     const [loading, setloading] = useState(true);
 
-    /*useEffect(() => {
+    // console.log(localStorage.getItem('auth'));
 
+    // let auth = JSON.parse(localStorage.getItem('auth'));
+    //     console.log(auth);
+    //     alert('check' + Authenticated);
+    //     console.log('Auth');
+    //     console.log(auth);
+
+    //     if(auth.statusCode === 200)
+    //     {
+    //         setAuthenticated(true);
+    //     }
+    //     // setloading(false);
+
+    //     return () => {
+    //         setAuthenticated(false);
+    //     };
+
+    useEffect(() => {
+        
         let auth = JSON.parse(localStorage.getItem('auth'));
 
         if(auth.statusCode === 200)
         {
             setAuthenticated(true);
         }
-        // setloading(false);
+        setloading(false);
 
         return () => {
             setAuthenticated(false);
         };
     }, []);
 
-    /*
-    axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
+    
+    /*axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
         if(err.response.status === 401)
         {
             swal("Unauthorized",err.response.data.message,"warning");
@@ -54,26 +73,26 @@ function AdminPrivateRoute({...rest}) {
     );
     */
 
-    // if(loading)
-    // {
-    //     return <h1>Loading...</h1>
-    // }
+    if(loading)
+    {
+        return <h1>Loading...</h1>
+    }
 
     return (
         
-        // <Route {...rest}
-        //     render={ ({props, location}) => 
-        //         Authenticated ?
-        //         ( <MasterLayout {...props} /> ) :
-        //         ( <Redirect to={{pathname: "/login", state: {from: location} }} /> ) 
-        //     }
-        // />
-
         <Route {...rest}
-            render={ ({props,location}) =>  
-                <MasterLayout {...props} />
+            render={ ({props, location}) => 
+                Authenticated ?
+                ( <MasterLayout {...props} /> ) :
+                ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
             }
         />
+
+        // <Route {...rest}
+        //     render={ ({props,location}) =>  
+        //         <FrontendLayout {...props} />
+        //     }
+        // />
 
     );
 }

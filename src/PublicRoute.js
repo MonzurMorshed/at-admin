@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import FrontendLayout from './layouts/frontend/FrontendLayout';
+import FrontendLayout from './app/layouts/frontend/FrontendLayout';
 
 console.log('pulic route');
 
