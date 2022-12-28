@@ -17,7 +17,7 @@ import {
   TablePagination,
 } from "@material-ui/core";
 
-import StatusBullet from "../../StatusBullet";
+import StatusBullet from "../../components/StatusBullet";
 import Toolbar from '../Toolbar';
 
 const statusColors = {
