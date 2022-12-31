@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, useHistory,Route} from 'react-router-dom';
-// import MasterLayout from './layouts/admin/MasterLayout';
+import MasterLayout from './app/layouts/admin/MasterLayout';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import Login from './app/frontend/auth/Login';
 import Register from './app/frontend/auth/Register';
@@ -19,7 +19,7 @@ function App() {
         <Router>
           <Switch>
 
-            <AdminPrivateRoute path="/admin/dashboard" name="Dashboard" />
+            {/* <AdminPrivateRoute path="/admin/dashboard" name="Dashboard" /> */}
 
             <Route exact path="/">
               {localStorage.getItem('auth_token') ? history.push("/") : <Login />}
@@ -29,6 +29,7 @@ function App() {
               {localStorage.getItem('auth_token') ? history.push("/") : <Register />}
             </Route>
 
+            <Route path="/admin" name="Admin" render={(props) => <MasterLayout {...props} />} />
             {/* <Route path="/" render={() => < Login/>} />
 
             <Route path="/register" render={() => <Register/>} />

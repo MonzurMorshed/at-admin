@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Route, useHistory, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import MasterLayout from './app/layouts/admin/MasterLayout';
-import FrontendLayout from './app/layouts/frontend/FrontendLayout';
+// import FrontendLayout from './app/layouts/frontend/FrontendLayout';
 import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
@@ -46,7 +46,7 @@ function AdminPrivateRoute({...rest}) {
     }, []);
 
     
-    /*axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
+    axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
         if(err.response.status === 401)
         {
             swal("Unauthorized",err.response.data.message,"warning");
@@ -71,28 +71,35 @@ function AdminPrivateRoute({...rest}) {
             return Promise.reject(error);
         }
     );
-    */
+    
 
     if(loading)
     {
         return <h1>Loading...</h1>
     }
 
+    console.log('Route : ');
+    console.log(rest);
+    // alert(rest);
+
     return (
         
-        <Route {...rest}
-            render={ ({props, location}) => 
-                Authenticated ?
-                ( <MasterLayout {...props} /> ) :
-                ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
-            }
-        />
-
         // <Route {...rest}
-        //     render={ ({props,location}) =>  
-        //         <FrontendLayout {...props} />
+        //     render={ ({props, location}) => 
+        //         Authenticated ?
+        //         ( <MasterLayout {...props} /> ) :
+        //         ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
         //     }
         // />
+        <>
+        <p>Hello</p>
+
+        <Route {...rest}
+            render={ ({props,location}) =>  
+                <MasterLayout {...props} />
+            }
+        />
+        </>
 
     );
 }

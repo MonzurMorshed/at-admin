@@ -24,8 +24,6 @@ function Login() {
         setLogin({...loginInput, [e.target.name]: e.target.value });
     }
 
-    // const cookies = new Cookies();
-
     const loginSubmit = (e) => {
         e.preventDefault();
         
