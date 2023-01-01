@@ -7,7 +7,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { BiDotsVerticalRounded } from 'react-icons/bi';
 import {
-  Card,
   CardActions,
   CardContent,
   Table,
@@ -66,8 +65,6 @@ const useStyles = makeStyles(theme => ({
   
 export default function ViewVendor(props) {
 
-    const { query, cubejsApi, ...rest } = props;
-
     const classes = useStyles();
   
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -84,7 +81,7 @@ export default function ViewVendor(props) {
       { text: "Action"}
     ];
 
-    const { resultSet, error, isLoading } = useState(false);
+    const { error, isLoading } = useState(false);
 
     const dataArray = [
         {
@@ -144,7 +141,7 @@ export default function ViewVendor(props) {
       }
     ];
     
-    const [sorting, setSorting] = useState([]);
+    const [sorting] = useState([]);
     const [result, setResult] = useState([]);
 
     const { items, requestSort, sortConfig } = useCustomSort(dataArray);
@@ -165,7 +162,7 @@ export default function ViewVendor(props) {
         setResult(items);
       }, 2000);
       return () => clearTimeout(timeout);
-    }, [result]);
+    }, [items]);
 
     if (isLoading) {
       return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -178,6 +175,7 @@ export default function ViewVendor(props) {
     
   
     const handlePageChange = (event, page) => {
+      event.preventDefault();
       setPage(page);
     };
      
@@ -232,7 +230,7 @@ export default function ViewVendor(props) {
                                                   <TableCell>
                                                     <StatusBullet
                                                       className={classes.status}
-                                                      color={statusColors["`${obj.status}`"]}
+                                                      color={statusColors[`${obj.status}`]}
                                                       size="sm"
                                                     />
                                                     {obj.status}

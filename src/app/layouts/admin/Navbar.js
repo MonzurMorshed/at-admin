@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import TitleImage from '../../../assets/admin/assets/images/front/amharctech-logo.png';
 import axios from 'axios';
@@ -24,6 +24,7 @@ const Navbar = () => {
         axios.post('http://165.232.40.251/api/admin/logout',data, {
             headers: headers,
         }).then(res =>{
+            console.log(res);
             if(auth.statusCode === 200){
                 const cookies = new Cookies();
                 cookies.remove('jwt','/');

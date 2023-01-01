@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
 import swal from 'sweetalert';
 import DataTable from 'react-data-table-component';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
@@ -14,7 +12,7 @@ const ViewCategory = () => {
     const [pending, setPending] = useState(true);
     const [rows, setRows] = useState([]);
     const [filterText, setFilterText] = useState('');
-    const [filterParent, setFilterParent] = useState('');
+    // const [filterParent, setFilterParent] = useState('');
 
     const editEvent = () => {
         // e.persist();
@@ -105,20 +103,20 @@ const ViewCategory = () => {
         }
     ];
 
-    const paginationComponentOptions = {
-        rowsPerPageText: 'Filas por página',
-        rangeSeparatorText: 'de',
-        selectAllRowsItem: true,
-        selectAllRowsItemText: 'Todos',
-    };
+    // const paginationComponentOptions = {
+    //     rowsPerPageText: 'Filas por página',
+    //     rangeSeparatorText: 'de',
+    //     selectAllRowsItem: true,
+    //     selectAllRowsItemText: 'Todos',
+    // };
 
     const filteredItems = dataArray.filter(
 		item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
 	);
 
-    const filteredItemsByParent = dataArray.filter(
-		item => item.name && item.name.toLowerCase().includes(filterParent.toLowerCase()),
-	);
+    // const filteredItemsByParent = dataArray.filter(
+	// 	item => item.name && item.name.toLowerCase().includes(filterParent.toLowerCase()),
+	// );
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -126,7 +124,7 @@ const ViewCategory = () => {
             setPending(false);
         }, 2000);
         return () => clearTimeout(timeout);
-    }, [filterText]);
+    }, [filteredItems]);
     
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -134,7 +132,7 @@ const ViewCategory = () => {
             setPending(false);
         }, 2000);
         return () => clearTimeout(timeout);
-    }, [filterParent]);
+    }, [filteredItems]);
 
     return (
 

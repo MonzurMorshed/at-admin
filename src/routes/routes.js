@@ -11,7 +11,7 @@ import Order from '../app/admin/order/Order';
 import Vendor from '../app/admin/vendor/Vendor';
 import ViewVendor from '../app/admin/vendor/ViewVendor';
 import EditVendor from '../app/admin/vendor/EditVendor';
-import BusinessProfile from '../app/admin/businessprofile/vendor/BusinessProfile';
+import BusinessProfile from '../app/admin/businessprofile/BusinessProfile';
 
 
 const routes = [

@@ -14,7 +14,6 @@ function Category() {
         slug: '',
         name: '',
         image: '',
-        status: '',
         meta_key: '',
         meta_type: '',
         meta_description: '',

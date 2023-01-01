@@ -3,40 +3,46 @@ import React, {useState, useEffect} from 'react';
 
 function Profile() {
 
-    // const [user, setUser] = useState([]);
-    const userdata = JSON.parse(localStorage.getItem('auth'));
-    const profileId = userdata.user.id;
+    const [users, setUsers] = useState([]);
+    const [errors,setErrors] = useState();
+    let auth = JSON.parse(localStorage.getItem('auth'));
+    const profileId = auth.user.id;
 
-    // const userprofile = () =>{
-    //     axios.get('http://192.168.88.107:3001/api/admin/user/'+profileId)
-    //       .then(function (response) {
-    //         console.log(response);
-    //         const userdata = JSON.stringify(response.data.resp);
-    //       })
-    //       .catch(function (error) {
-    //         // history.push('/'); 
-    //       });
-    // }
+    useEffect(() => {
+        setErrors(false);
+        axios.get('http://192.168.88.107:3001/api/admin/user/'+profileId)
+          .then(function (response) {
+            const userdata = JSON.stringify(response.data.resp);
+            setUsers(userdata);
+          })
+          .catch(function () {
+              console.log(errors);
+            // history.push('/'); 
+          });
+    },[users]);
 
-    let [users, setUsers] = useState([]);
+    /*
+    let auth = JSON.parse(localStorage.getItem('auth'));
+    const headers = {
+        Authorization : `Bearer ${auth.jwt}`
+    }
 
     useEffect(() => {
         axios
-        .get('http://192.168.88.107:3001/api/admin/user',{
-            withCredentials: true,
-            jwt: userdata.jwt
-        })
+            .get('http://192.168.88.107:3001/api/admin/user',{
+                headers: headers,
+            })
         .then(response => setUsers(response.data));
     }, []);
-
-    console.log(users);
+    */
 
     return  (
         <div className='container-fluid my-5'>
             <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
-                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">'
+                    <img alt="AT\" class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"/><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
                 </div>
                 <div class="col-md-5 border-right">
                     <div class="p-3 py-5">

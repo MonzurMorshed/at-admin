@@ -92,19 +92,19 @@ function Register() {
                                             <div className="form-group mb-3">
                                                 <button type="button" className="socialBtn col-md-12 btn btn-sm btn-default d-table m-0 m-auto justify-content-between">
                                                     Continue with Google
-                                                    <img className="logoSocialIocn" src={GoogleIcon}/>
+                                                    <img alt="AT AhmarcTech" className="logoSocialIocn" src={GoogleIcon}/>
                                                 </button>
                                             </div>
                                             <div className="form-group mb-3">
                                                 <button type="button" className="socialBtn col-md-12 btn btn-sm btn-default d-table m-0 m-auto justify-content-between">
                                                     Continue with Microsoft
-                                                    <img className="logoSocialIocn" src={MicrosoftIcon}/>
+                                                    <img alt="AT AhmarcTech" className="logoSocialIocn" src={MicrosoftIcon}/>
                                                 </button>
                                             </div>
                                             <div className="form-group mb-3">
                                                 <button type="button" className="socialBtn col-md-12 btn btn-sm btn-default d-table m-0 m-auto justify-content-between">
                                                     Continue with Apple
-                                                    <img className="logoSocialIocn" src={AppleIcon}/>
+                                                    <img alt="AT AhmarcTech" className="logoSocialIocn" src={AppleIcon}/>
                                                 </button>
                                             </div>
                                             <div className="text-center regFormFooterText">

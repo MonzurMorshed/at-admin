@@ -1,13 +1,8 @@
 import React, {useState,useEffect} from 'react';
-import {Route, useHistory, Redirect} from 'react-router-dom';
-import axios from 'axios';
+import {Route, Redirect} from 'react-router-dom';
 import MasterLayout from './app/layouts/admin/MasterLayout';
-import FrontendLayout from './app/layouts/frontend/FrontendLayout';
-import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
-
-    let history = useHistory();
 
     const [Authenticated, setAuthenticated] = useState(false);
     const [loading, setloading] = useState(true);
@@ -78,13 +73,11 @@ function AdminPrivateRoute({...rest}) {
         return <h1>Loading...</h1>
     }
 
+    console.log(Authenticated);
     return (
-        
         <Route {...rest}
             render={ ({props, location}) => 
-                Authenticated ?
-                ( <MasterLayout {...props} /> ) :
-                ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
+                Authenticated ? ( <MasterLayout {...props} /> ) : ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
             }
         />
 

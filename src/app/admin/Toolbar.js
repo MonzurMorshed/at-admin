@@ -2,17 +2,10 @@ import "date-fns";
 import React,{useState} from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import withStyles from "@material-ui/core/styles/withStyles";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
-import Slider from "@material-ui/core/Slider";
 
 const AntTabs = withStyles({
   indicator: {},
@@ -71,21 +64,24 @@ const useStyles = makeStyles(theme => ({
 
 const Toolbar = props => {
 
+  // const {
+  //   startDate,
+  //   setStartDate,
+  //   finishDate,
+  //   setFinishDate,
+  //   priceFilter,
+  //   setPriceFilter,
+  //   className,
+  //   statusFilter,
+  //   setStatusFilter,
+  // } = props;
+
   const {
-    startDate,
-    setStartDate,
-    finishDate,
-    setFinishDate,
-    priceFilter,
-    setPriceFilter,
-    className,
-    statusFilter,
-    setStatusFilter,
-    ...rest
+    statusFilter
   } = props;
 
   const [tabValue, setTabValue] = useState(statusFilter);
-  const [rangeValue, rangeSetValue] = useState(priceFilter);
+  // const [rangeValue, rangeSetValue] = useState(priceFilter);
 
   const tabs = [
     {name: "Pending"},
@@ -98,28 +94,17 @@ const Toolbar = props => {
   const classes = useStyles();
 
   const handleChangeTab = (e, value) => {
-    console.log(value);
     setTabValue(value);
-    // setStatusFilter(value);
     let statusSearch = '';
-    if(value == 0) { statusSearch = 'unapprove'; }
-    else if(value == 1) { statusSearch = 'approve'; }
-    else if(value == 2) { statusSearch = 'completed'; }
+    if(value === 0) { statusSearch = 'unapprove'; }
+    else if(value === 1) { statusSearch = 'approve'; }
+    else if(value === 2) { statusSearch = 'completed'; }
     vendor.filter(
         item => item.status && item.status.toLowerCase().includes(statusSearch.toLowerCase()),
     );
   };
 
-//   useEffect(() => {
-//     const timeout = setTimeout(() => {
-//         setRows(filteredItems);
-//         setPending(false);
-//     }, 2000);
-//     return () => clearTimeout(timeout);
-//   }, [filterText]);
-
-
-  const handleDateChange = (date) => {
+  /*const handleDateChange = (date) => {
     setStartDate(date);
   };
   const handleDateChangeFinish = (date) => {
@@ -133,6 +118,7 @@ const Toolbar = props => {
       setPriceFilter(newValue);
     });
   };
+  */
 
   return (
     

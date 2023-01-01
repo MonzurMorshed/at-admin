@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 // import axios from 'axios';
 // import swal from 'sweetalert';
 import { AiOutlineUser,AiOutlinePhone,AiOutlineMobile,AiOutlineMail,AiOutlineHome } from 'react-icons/ai';
-import {businessprofile} from '../../../../DummyData';
+// import {businessprofile} from '../../../DummyData';
 
 const iconstyle = {
     background: "#de4930",
@@ -19,9 +19,7 @@ const inputField = {
 
 function BusinessProfile() {
 
-    console.log(businessprofile);
-
-    const [vendorInput, setVendor] = useState({
+    const [businessprofileInput, setbusinessprofileInput] = useState({
         name: "",
         mobile: "",
         phone: "",
@@ -33,19 +31,19 @@ function BusinessProfile() {
     
     const handleInput = (e) => {
         e.persist();
-        setVendor({...vendorInput, [e.target.name]: e.target.value })
+        setbusinessprofileInput({...businessprofileInput, [e.target.name]: e.target.value })
     }
 
     
-    const submitVendor = (e) => {
+    const submitBusinessprofile = (e) => {
         e.preventDefault();
 
         // const data = {
-        //     name:vendorInput.name,
-        //     mobile:vendorInput.mobile,
-        //     phone:vendorInput.phone,
-        //     email:vendorInput.email,
-        //     address:vendorInput.address
+        //     name:businessprofileInput.name,
+        //     mobile:businessprofileInput.mobile,
+        //     phone:businessprofileInput.phone,
+        //     email:businessprofileInput.email,
+        //     address:businessprofileInput.address
         // }
 
         /*
@@ -58,7 +56,7 @@ function BusinessProfile() {
             }
             else if(res.data.status === 400)
             {
-                setVendor({...vendorInput, error_list:res.data.errors});
+                setVendor({...businessprofileInput, error_list:res.data.errors});
             }
         });
         */
@@ -66,12 +64,12 @@ function BusinessProfile() {
     }
 
     var display_errors = [];
-    if(vendorInput.error_list)
+    if(businessprofileInput.error_list)
     {
         display_errors = [
-            vendorInput.error_list.name,
-            vendorInput.error_list.mobile,
-            vendorInput.error_list.email,
+            businessprofileInput.error_list.name,
+            businessprofileInput.error_list.mobile,
+            businessprofileInput.error_list.email,
         ]
     }
     
@@ -92,37 +90,37 @@ function BusinessProfile() {
                     </h4>
                 </div>
                 <div className="card-body">
-                    <form onSubmit={submitVendor} id="VENDOR_FORM">
+                    <form onSubmit={submitBusinessprofile} id="VENDOR_FORM">
                         <div className="card-body col-md-10 m-0 m-auto" id="" aria-labelledby="home-tab">
 
                             <div className="form-group mb-3">
                                 <div className='row'>
                                     <div className='col-md-1' style={iconstyle}><AiOutlineUser/></div>
-                                    <div className='col-md-9' style={inputField}><input type="text" name="name" onChange={handleInput} value={vendorInput.name} className="form-control" placeholder="Enter vendor name"/></div>
+                                    <div className='col-md-9' style={inputField}><input type="text" name="name" onChange={handleInput} value={businessprofileInput.name} className="form-control" placeholder="Enter vendor name"/></div>
                                 </div>
                             </div>
                             <div className="form-group mb-3">
                                 <div className='row'>
                                     <div className='col-md-1' style={iconstyle}><AiOutlinePhone/></div>
-                                    <div className='col-md-9' style={inputField}><input type="phone" name="mobile" onChange={handleInput} value={vendorInput.mobile} className="form-control" placeholder="Enter vendor mobile"/></div>
+                                    <div className='col-md-9' style={inputField}><input type="phone" name="mobile" onChange={handleInput} value={businessprofileInput.mobile} className="form-control" placeholder="Enter vendor mobile"/></div>
                                 </div>
                             </div>
                             <div className="form-group mb-3">
                                 <div className='row'>
                                     <div className='col-md-1' style={iconstyle}><AiOutlineMobile/></div>
-                                    <div className='col-md-9' style={inputField}><input type="phone" name="phone" onChange={handleInput} value={vendorInput.phone} className="form-control" placeholder="Enter vendor phone"/></div>
+                                    <div className='col-md-9' style={inputField}><input type="phone" name="phone" onChange={handleInput} value={businessprofileInput.phone} className="form-control" placeholder="Enter vendor phone"/></div>
                                 </div>
                             </div>
                             <div className="form-group mb-3">
                                 <div className='row'>
                                     <div className='col-md-1' style={iconstyle}><AiOutlineMail/></div>
-                                    <div className='col-md-9' style={inputField}><input type="email" name="email" onChange={handleInput} value={vendorInput.email} className="form-control" placeholder="Enter vendor email"/></div>
+                                    <div className='col-md-9' style={inputField}><input type="email" name="email" onChange={handleInput} value={businessprofileInput.email} className="form-control" placeholder="Enter vendor email"/></div>
                                 </div>
                             </div>
                             <div className="form-group mb-3">
                                 <div className='row'>
                                     <div className='col-md-1' style={iconstyle}><AiOutlineHome/></div>
-                                    <div className='col-md-9' style={inputField}><textarea name="address" onChange={handleInput} value={vendorInput.address} className="form-control"></textarea></div>
+                                    <div className='col-md-9' style={inputField}><textarea name="address" onChange={handleInput} value={businessprofileInput.address} className="form-control"></textarea></div>
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary px-4 float-end">Submit</button>
