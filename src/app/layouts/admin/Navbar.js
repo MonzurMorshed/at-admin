@@ -4,30 +4,25 @@ import TitleImage from '../../../assets/admin/assets/images/front/amharctech-log
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-
-
+import dummy_user from '../../../assets/admin/images/dummy_user.png';
 
 const Navbar = () => {
     
-    
     let history = useHistory();
+    let auth = JSON.parse(localStorage.getItem('auth'));
+    let user_details  = JSON.parse(localStorage.getItem('user_details'));
+    console.log(user_details);
 
     const logoutSubmit = (e) => {
         e.preventDefault();
-        let auth = JSON.parse(localStorage.getItem('auth'));
-        const headers = {
-            Authorization : `Bearer ${auth.jwt}`
-        }
         
         const data = '';
         axios.post('http://165.232.40.251/api/admin/logout',data, {
-            headers: headers,
+            headers: {
+                Authorization : auth.jwt,
+            }
         }).then(res =>{
-            console.log(res);
             if(auth.statusCode === 200){
-                const cookies = new Cookies();
-                cookies.remove('jwt','/');
                 swal("Success",'',"success");
                 localStorage.removeItem('auth');
                 history.push('/');
@@ -64,14 +59,16 @@ const Navbar = () => {
             <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div className="input-group">
                     <input className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
+                    <button className="btn btn-primary" type="button"><i className="fas fa-search"></i></button>
                 </div>
             </form>
 
             <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
                 <li className="nav-item dropdown">
                     <Link to="#" className="nav-link dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i className="fas fa-user fa-fw"></i>
+                        <span>John Doe</span>
+                        <img alt="User" src={dummy_user} style={{width:30 +"px",height:30 +"px"}} />
+                        <i className="fa-fw"></i>
                     </Link>
                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><Link className="dropdown-item" to="/admin/user/user">Profile</Link></li>

@@ -21,7 +21,7 @@ const MasterLayout = () => {
                     <Sidebar />
                 </div>
 
-                <div id="layoutSidenav_content" style={{backgroundColor: '#e8fbff'}}>
+                <div id="layoutSidenav_content">
                     <main>
                         
                         <Switch>

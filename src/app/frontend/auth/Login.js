@@ -7,7 +7,6 @@ import GoogleIcon  from '../../../assets/admin/assets/images/social_icon/google.
 import MicrosoftIcon  from '../../../assets/admin/assets/images/social_icon/microsoft.png';
 import AppleIcon  from '../../../assets/admin/assets/images/social_icon/apple.png';
 import LogoInImage from '../../../assets/admin/assets/images/front/illus-1.png';
-import Cookies from 'universal-cookie';
 
 function Login() {
 
@@ -24,8 +23,6 @@ function Login() {
         setLogin({...loginInput, [e.target.name]: e.target.value });
     }
 
-    // const cookies = new Cookies();
-
     const loginSubmit = (e) => {
         e.preventDefault();
         
@@ -41,12 +38,14 @@ function Login() {
             localStorage.setItem('auth', res);
             
             let auth = JSON.parse(localStorage.getItem('auth'));
-            const cookies = new Cookies();
-            cookies.set('jwt', auth.jwt, { path: '/' });
                 
             if(auth.statusCode === 200)
             {
                 swal("Success",'Sign In to dashboard',"success");
+                axios.get('http://165.232.40.251/api/admin/user').then(res => {
+                    res = JSON.stringify(res);
+                    localStorage.setItem('user_details', res);
+                })
                 // if(res.data.role === 'admin')
                 // {
                 //     history.push('http://192.168.88.107:3001/admin/dashboard');

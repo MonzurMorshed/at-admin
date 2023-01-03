@@ -1,6 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import MasterLayout from './app/layouts/admin/MasterLayout';
+// import FrontendLayout from './app/layouts/frontend/FrontendLayout';
+import swal from 'sweetalert';
 
 function AdminPrivateRoute({...rest}) {
 
@@ -67,25 +69,33 @@ function AdminPrivateRoute({...rest}) {
         }
     );
     */
+    
 
     if(loading)
     {
         return <h1>Loading...</h1>
     }
 
-    console.log(Authenticated);
-    return (
-        <Route {...rest}
-            render={ ({props, location}) => 
-                Authenticated ? ( <MasterLayout {...props} /> ) : ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
-            }
-        />
+    
 
+    return (
+        
         // <Route {...rest}
-        //     render={ ({props,location}) =>  
-        //         <FrontendLayout {...props} />
+        //     render={ ({props, location}) => 
+        //         Authenticated ?
+        //         ( <MasterLayout {...props} /> ) :
+        //         ( <Redirect to={{pathname: "/", state: {from: location} }} /> ) 
         //     }
         // />
+        <>
+        <p>Hello</p>
+
+        <Route {...rest}
+            render={ ({props,location}) =>  
+                <MasterLayout {...props} />
+            }
+        />
+        </>
 
     );
 }

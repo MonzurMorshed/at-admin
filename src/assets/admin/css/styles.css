@@ -10942,6 +10942,7 @@ body {
   width: 225px;
   height: 100vh;
   z-index: 1038;
+  border-right: 0.5px solid #fff2f2;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
   padding-top: 56px;
@@ -11308,6 +11309,7 @@ html {
 
 nav.sb-topnav.navbar.navbar-expand {
   background: #fff;
+  border-bottom: 1px solid #fff2f2;
 }
 
 /* user profile */
@@ -11367,4 +11369,8 @@ nav.sb-topnav.navbar.navbar-expand {
 .rdt_TableHeader {
   display: contents;
   padding: 0px !important;
+}
+
+.layoutSidenav_content{
+  background-color: #fff;
 }
